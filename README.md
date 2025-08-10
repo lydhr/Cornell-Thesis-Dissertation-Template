@@ -38,4 +38,4 @@ Other files are additional examplary content, taking Harry Potter as an example:
     └── paper4.tex
 ```
 
-
+Preview: [`main.pdf`](https://github.com/lydhr/Cornell-Thesis-Dissertation-Template/tree/main/main.py)
