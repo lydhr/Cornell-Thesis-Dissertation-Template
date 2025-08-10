@@ -1,0 +1,49 @@
+Template files were downloaded from [1] on August 5, 2025, including changelog.txt, cornell.cls, and hangcaption.sty
+
+[1] https://gradschool.cornell.edu/academic-progress/degrees-fields/research-degree-requirements/thesis-dissertation/templates/
+
+Two changes were implemented to this ZIP archive on 7/15/2025
+==========================================
+1) Added \pagenumbering{roman} to the definition of the title page environment
+2) Added \pagenumbering{gobble} to the definition of the abstract environment
+
+This fixes the following issue reported by Chaitanya Tappu (ct596@cornell.edu):
+The current template class file assigns the title, copyright, and abstract pages numbers (arabic) 1, 2, 3 (possibly more if the abstract takes up multiple pages, I wouldn't know) but doesn't print it to output due to \pagestyle{empty}. Then it sets the page counter to 3 and numbering to roman and pagestyle to plain so that biosketch onwards page number is typeset correctly.
+This is all cool and went under the radar until I opened my draft on my pdf viewer and wanted to print only the introduction chapter in the main body. In the pdf document, the page numbers assigned are sequentially 1,2,3,iii,iv,v,vi,1,2,3,4,5, ... so when I asked my pdf viewer to print only pages 1-5, it printed all the ones above.
+
+Solution: In the class file cornell.cls,
+1. In the definition of the titlepage environment, add \pagenumbering{roman} so that it looks
+\renewenvironment{titlepage}{%
+\typeout{Title page}
+\pagestyle{empty}
+\pagenumbering{roman} %add this
+\doublespacing
+}{%
+\normalspacing\clearpage
+}
+2. In the definition of the abstract environment, add \pagenumbering{gobble} so that it looks
+\renewenvironment{abstract}{
+\typeout{Abstract}
+\setlength{\@abhdskip}{.6in}
+...
+\end{center}%
+\pagestyle{empty}
+\pagenumbering{gobble} %add this. 
+%%%now the abstract page has literally no assigned page number in the semantic sense. it shows blank on my pdf viewer while still being 3/93 among the total pages in the pdf output.
+\thispagestyle{empty}
+}{%
+\clearpage
+}
+
+
+
+
+Two changes were implemented to this ZIP archive on 6/12/2025
+==========================================
+1) Added `\usepackage{hyperref}` to the `sampleThesis.tex` file.
+2) Added `\phantomsection` to the line in `cornell.cls` that says `\renewcommand{\prelim@contents}[1]{\addcontentsline{toc}{section}{#1}}` in the following way:
+`\renewcommand{\prelim@contents}[1]{\phantomsection\addcontentsline{toc}{section}{#1}}`
+
+This fixes the following issue reported by Kevin Alarcón Negy (kan65@cornell.edu): 
+Similar to my peers from the Computer Science department, I wanted a table of contents with clickable links to chapters and sections, but to do so, I needed to use the hyperref package. Unfortunately, it turns out that using this package with the default `cornell.cls` file from the Cornell LaTeX template leads to broken links for all the preliminary sections.
+For instance, an example dissertation from a few years ago has a "Dedication" and "Acknowledgements" link that both jump to "Biographical Sketch", a "Table of Contents" link that jumps to "Acknowledgements", and more broken links. That dissertation was from 2022 and the problem still can be found in dissertations as recent as last year.
