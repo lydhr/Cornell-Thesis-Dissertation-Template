@@ -54,3 +54,7 @@ The thesis consists of typical chapters including:
 - individual papers
 - conclusion
 - biblography
+
+
+### License
+Code released under [WTFPL](http://www.wtfpl.net/)
