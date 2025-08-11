@@ -41,7 +41,7 @@ Other files are additional examplary content, taking Harry Potter as an example:
 Preview: [`main.pdf`](https://github.com/lydhr/Cornell-Thesis-Dissertation-Template/tree/main/main.pdf)
 
 
-The thesis consists of typical chapters including:
+The thesis consists of typical chapters including: [(requirements)](https://gradschool.cornell.edu/academic-progress/degrees-fields/research-degree-requirements/thesis-dissertation/writing-your-thesis-dissertation/required-sections-guidelines-and-suggestions/)
 - cover
 - copyright
 - abstract
